@@ -4,8 +4,8 @@ const db = require('../db');
 
 
 router.get('/', async (req, res) => {
-    let { num } = req.query;
-    console.log(num);
+    let { num, name } = req.query;
+    console.log(num, name);
 
     try {
         const cursor = await db
@@ -25,11 +25,14 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
+router.get('/new', async (req, res) => {
+    const { name, type } = req.query;
     const task = {
-        name: 'reading',
+        // name: 'reading',
+        name,
         time: Date.now(),
-        type: 'educational'
+        type
+        // type: 'educational'
     };
 
     try {
@@ -66,6 +69,27 @@ router.patch('/', async (req, res) => {
         console.log(`${modifiedCount} Documents were updated`);
 
         res.json({ matchedCount, modifiedCount });
+        }
+    } catch(e) {
+        console.log(e);
+    }
+});
+
+
+router.delete('/', async (req, res) => {
+
+    const { deleteTag } = req.params;
+    console.log(req.params);
+    try {
+        const result = await db
+                            .db('turingdb')
+                            .collection('tasks')
+                            .deleteMany({ name: { $regex: `${deleteTag}` } });        
+    if(result) {
+        const { deletedCount } = result;
+        console.log(`${deletedCount} Documents were deleted`);
+
+        res.json({ deletedCount });
         }
     } catch(e) {
         console.log(e);

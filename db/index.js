@@ -15,11 +15,11 @@ async function dbFunc() {
 
         console.log('DB Connected');
     } catch(e) {
-        throw e.message;
+        console.log(`Connection error !, error message: ${e.message}`);
     } finally {
         // await db.close();
     }
-}
+} 
 
 dbFunc();
 
