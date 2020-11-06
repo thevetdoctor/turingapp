@@ -1,0 +1,45 @@
+.task {
+    /* border: 1px solid; */
+    padding: 1em;
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    font-size: 1.3em;
+    font-weight: bold;
+    line-height: 0.6;
+    border-radius: 0.5em;
+    margin: 0.4em;
+    transition: background-color 0.5s ease;
+    /* transition-delay: 0.2s; */
+    /* transition-duration: 0.3s; */
+}
+
+.strike {
+    text-decoration: line-through;
+}
+
+.task:hover {
+    background-color: lightgray;
+    color: #000;
+    cursor: pointer;
+}
+
+.task_checkbox {
+    position: absolute;
+    flex: 1;
+    left: 2em;
+}
+
+.task_delete {
+    position: absolute;
+    flex: 1;
+    right: 2em;
+    border-radius: 0.5em;
+    padding: 0.3em 0.5em;
+    display: inline-block;
+}
+
+.task_delete:hover {
+    color: red;
+}
