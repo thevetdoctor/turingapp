@@ -2,11 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import reducer, { initialState } from './reducer';
+import { TaskProvider } from './TaskProvider';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <TaskProvider reducer={reducer} initialState={initialState}>
+      <App />
+    </TaskProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

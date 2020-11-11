@@ -4,15 +4,16 @@
   "description": "a sample app",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon",
-    "test": "jest"
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "jest --testTimeout=35000 --detectOpenHandles"
   },
   "jest": {
     "testEnvironment": "node",
     "coveragePathIgnorePatterns": [
       "/node_modules/"
     ]
-  },  
+  },
   "keywords": [
     "sample",
     "app",
@@ -23,6 +24,7 @@
   "dependencies": {
     "axios": "^0.21.0",
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongodb": "^3.6.2",

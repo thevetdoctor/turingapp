@@ -1,34 +1,33 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from 'react';
+/* eslint-disable no-undef */
+/* eslint-disable no-empty-pattern */
+/* eslint-disable react-hooks/exhaustive-deps */
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import './App.css';
 import Tasks from './Tasks';
-import axios from 'axios';
+import FinishedTasks from './FinishedTasks';
+import Header from './Header';
+import { useTaskState } from './TaskProvider';
 
 function App() {
-  const [ items, setItems ] = useState([
-    { _id: 1, name: 'swimming' },
-    { _id: 2, name: 'swimming' },
-    { _id: 3, name: 'swimming' },
-    { _id: 4, name: 'singing' }
-  ]);
+  const [{}, dispatch] = useTaskState();
 
-useEffect(() => {
-    const getItems = async () => {
-    const res = await axios({
-      method: 'GET',
-      url: 'localhost:5000/tasks'
-    });
-    console.log(res.data);
-  }
-    getItems();
-}, []);
-
-  console.log(items);
   return (
-    <div className="App">
-      <h2>Turing Task Manager</h2>
-      <Tasks items={items} />
-    </div>
+      <Router>
+        <div className="App">
+          <Switch>
+            <Route exact path="/">
+              <Header />
+              <Tasks />
+            </Route>
+            <Route path="/done">
+              <Header />
+              <FinishedTasks />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
   );
 }
 

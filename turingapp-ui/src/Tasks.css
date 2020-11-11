@@ -1,0 +1,38 @@
+.tasks_main {
+    background-color: aliceblue;
+    height: 80vh;
+    border-radius: 2em;
+    padding: .5em -2em;
+}
+
+.tasks_new {
+    position: relative;
+    left: 10em;
+    font-size: 1.5em;
+    cursor: pointer;
+    border: 1px solid;
+    width: 4.5em;
+    padding: .1em;
+    border-radius: .5em;
+    background-color: skyblue;
+    color: #fff;
+    box-shadow: 2px 2px;
+}
+
+a {
+    text-decoration: none;
+}
+.tasks_new:hover {
+    box-shadow: 2px 2px 2px skyblue;
+    background-color: #fff;
+    color: skyblue;
+}
+
+.tasks_new span {
+    position: relative;
+    top: -.4em;
+    font-size: .6em;
+    font-weight: 700;
+    margin: .2em -.1em;
+    padding: .5em .2em;
+}
