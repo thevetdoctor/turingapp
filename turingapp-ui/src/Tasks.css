@@ -5,18 +5,21 @@
     padding: .5em -2em;
 }
 
+.tasks_main div:first-child {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 0.5em;
+}
+
 .tasks_new {
     position: relative;
-    left: 10em;
-    font-size: 1.5em;
+    font-size: 1.3em;
     cursor: pointer;
-    border: 1px solid;
-    width: 4.5em;
     padding: .1em;
     border-radius: .5em;
-    background-color: skyblue;
+    background-color: rgb(79, 165, 199);
     color: #fff;
-    box-shadow: 2px 2px;
+    box-shadow: -2px 2px 2px;
 }
 
 a {
@@ -35,4 +38,26 @@ a {
     font-weight: 700;
     margin: .2em -.1em;
     padding: .5em .2em;
+}
+
+.closeBtn {
+    color: #fff;
+    cursor: pointer;
+}
+
+form input {
+    border-radius: .6em;
+    padding: .6em;
+    margin-top: .6em;
+    margin-left: -.4em;
+    width: 100%;
+    font-size: 1em;
+}
+
+input[type=submit] {
+    margin-left: .5em;
+    background-color: purple;
+    color: #fff;
+    font-size: 1em;
+    font-weight: bold;
 }

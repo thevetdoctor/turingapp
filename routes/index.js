@@ -28,7 +28,8 @@ router.get('/', async (req, res) => {
 
 router.post('/new', async (req, res) => {
     const { name, type } = req.body;
-    console.log('Query params: ', req.body);
+    console.log('Request Body: ', req.body);
+    console.log(name, type);
 
     if(!name || !type) {
         return res.status(401).json({message: 'Name & type is required!'});
@@ -63,17 +64,22 @@ router.post('/new', async (req, res) => {
 router.patch('/:taskId', async (req, res) => {
 
     const { taskId } = req.params;
-    const { name, type } = req.body;
+    const { name, type, checked, done } = req.body;
     console.log('Query params: ', req.body);    
     console.log('task ID: ', taskId);
-    if(name === undefined || type === undefined) {
-        return res.status(401).json({message: 'Name & type is required for update!'});
-    }
     try {
-        const result = await db
-                            .db('turingdb')
-                            .collection('tasks')
-                            .updateOne({ "_id" : ObjectId(taskId) }, { $set: { name: name, type: type } });
+        let result;
+            if(name && type) {
+                result = await db
+                .db('turingdb')
+                .collection('tasks')
+                .updateOne({ "_id" : ObjectId(taskId) }, { $set: { name: name, type: type } });
+                }   else {
+                    result = await db
+                    .db('turingdb')
+                    .collection('tasks')
+                    .updateOne({ "_id" : ObjectId(taskId) }, { $set: { checked: checked, done: done } });
+                } 
                             
     if(result) {
         const { modifiedCount, matchedCount } = result;

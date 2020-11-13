@@ -5,25 +5,32 @@ import Task from './Task';
 import "./Tasks.css";
 import Modal from 'react-modal';
 import { useTaskState } from './TaskProvider';
-import { FaTimesCircle, FaRegPlusSquare } from 'react-icons/fa';
+import { FaTimes, FaPlus } from 'react-icons/fa';
 import axios from 'axios';
 
-// const customStyles = {
-//   content : {
-//     top                   : '50%',
-//     left                  : '50%',
-//     right                 : 'auto',
-//     bottom                : 'auto',
-//     marginRight           : '-50%',
-//     transform             : 'translate(-50%, -50%)'
-//   }
-// };
+const customStyles = {
+  content : {
+    backgroundColor: 'rgb(79, 165, 199)',
+    fontSize: '1.5em',
+    top                   : '40%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '50%',
+    transform             : 'translate(-50%, -50%)',
+    display: 'flex',
+    flexFlow: 'column',
+    width: '100vw',
+    alignItems: 'center',
+    borderRadius: '1em',
+    justifyContent: 'center'
+  }
+};
 
 export default function Tasks(props) {
   const [{ tasks }, dispatch] = useTaskState();
   const [openModal, setOpenModal] = useState(false);
 
-  console.log('within Task component: ', tasks);
   Modal.setAppElement('div');
 
   useEffect(() => {
@@ -42,41 +49,69 @@ export default function Tasks(props) {
         getTasks();
     }, [])
 
+    const formChange = (e) => {
+      e.preventDefault();
+      console.log(e.target.value);
+    }
+    const submitForm = (e) => {
+      e.preventDefault();
+      console.log(e.target);
+    }
+
+    const allTasks = tasks.filter(x => x.checked !== 'strike');
+  console.log('within Task component: ', allTasks);
+
     return (
         <div>
-            <h3>My Tasks : {tasks?.length}</h3>
+            <h3>My Tasks : {allTasks?.length}</h3>
             <Modal 
               isOpen={openModal}
-              // style={customStyles}
+              style={customStyles}
             >
-              <button onClick={() => setOpenModal(false)}><FaTimesCircle /></button>
+              <div className="closeBtn" onClick={() => setOpenModal(false)}><FaTimes /></div>
               <h2> Plan a new task! </h2>
-              <form>
-                <input type="text" placeholder="What task" />
-                <input type="text" placeholder="What type" />
-                <input type="submit"/>
+              <form 
+                onSubmit={(e) => submitForm(e)} 
+                >
+                <input 
+                  type="text" 
+                  placeholder="Enter your task e.g. Read"
+                  onChange={(e) => {formChange(e)}}
+                  /><br />
+                <input 
+                  type="text" 
+                  placeholder="Enter category, e.g sports"
+                  onChange={(e) => {formChange(e)}}
+                  /><br />
+                <input 
+                type="submit" 
+                />
               </form>
             </Modal>
             <div className="tasks_main">
               <div>
                 <div className="tasks_new" onClick={() => setOpenModal(true)}>
-                  <FaRegPlusSquare /> 
+                  <FaPlus /> 
                   <span>Add Task</span>
                 </div>
-                <div className="tasks_new">
                   <Link to="/done">
+                <div className="tasks_new">
                     <span>Finished Tasks</span>
-                  </Link>
                 </div>
+                  </Link>
               </div>
-              {tasks?.map((item) => (
+              {allTasks?.map((item) => (
                 <Task 
                   key={item._id}
                   id={item._id}
                   name={item.name}
                   type={item.type}
                   status={item.status}
-                  time={item.time}
+                  checked={item.checked}
+                  done={item.done}
+                  createdOn={item.createdOn}
+                  updatedOn={item.updatedOn}
+                  finishedOn={item.finishedOn}
                 /> 
               ))}
             </div>

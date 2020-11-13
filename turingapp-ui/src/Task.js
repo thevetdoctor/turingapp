@@ -1,6 +1,6 @@
 /* eslint-disable no-empty-pattern */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import axios from 'axios';
 import { FaTrashAlt } from 'react-icons/fa';
 import "./Task.css";
@@ -8,7 +8,7 @@ import { useTaskState } from './TaskProvider';
 import Moment from 'react-moment';
 
 export default function Task(props) {
-    const [ checked, setChecked ] = useState(false);
+    const { checked } = props;
     const [{}, dispatch] = useTaskState();
 
     const deleteTask = async (id) => {
@@ -17,7 +17,7 @@ export default function Task(props) {
         //     url: `http://localhost:5000/tasks/${id}`,
         //     headers: {'Content-Type': 'application/json'}
         //   });
-        //   console.log("API deleteTask data", deleteResponse.data);
+          // console.log("API deleteTask data", deleteResponse.data);
 
           dispatch({
             type: 'DELETE_TASK',
@@ -33,40 +33,54 @@ export default function Task(props) {
           dispatch({
             type: 'GET_TASKS',
             tasks: getResponse.data
-          })      
-        }
+          });
+    }
 
-        useEffect(() => {
-          
-          const checkTask = () => {
-            dispatch({
-              type: 'CHECK_TASK',
-              taskId: props.id
-            });
-          }
-          // const uncheckTask = () => {
-          //   dispatch({
-          //     type: 'UNCHECK_TASK',
-          //     taskId: props.id
-          //   });
-          // }
-          if(checked) {
-            console.log('checked');
-            checkTask(props._id);
-          } else {
-            console.log('checked');
-            // uncheckTask(props._id);
-          }
-          console.log('id: ', props.id);
-        }, [checked]);
+    const checkTask = async () => {
+      dispatch({
+        type: 'CHECK_TASK',
+        taskId: props.id
+      });
+      const getResponse = await axios({
+        method: 'PATCH',
+        url: `http://localhost:5000/tasks/${props.id}`,
+        headers: {'Content-Type': 'application/json'},
+        data: {checked: 'strike', done: true}
+      });
+      console.log("API data", getResponse.data);
+    }
+
+    const uncheckTask = async (id) => {
+      dispatch({
+        type: 'UNCHECK_TASK',
+        taskId: props.id
+      });
+      const getResponse = await axios({
+        method: 'PATCH',
+        url: `http://localhost:5000/tasks/${props.id}`,
+        headers: {'Content-Type': 'application/json'},
+        data: {checked: '', done: false}
+      });
+      console.log("API data", getResponse.data);
+    }
+
+    const setChecked = () => {
+      if(checked) {
+        console.log('unchecked');
+        uncheckTask(props.id);
+      } else {
+        console.log('checked');
+        checkTask(props.id);
+      }
+    }
 
     return (
-        <div className={`task ${!checked ? props.checked : ""}`}>
+        <div className={`task ${props.checked}`}>
             <input 
             className="task_checkbox"
             type="checkbox"
             checked={checked}
-            onChange={() => setChecked(!checked)}
+            onChange={() => setChecked()}
              />
             <div className="task_main">
                  {props.name}

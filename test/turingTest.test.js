@@ -3,9 +3,10 @@ const server = require('../index');
 
 
 describe('Test Endpoints', () => {
-  it('Return a response from the endpoint', async () => {
+  it('Return a response from the endpoint', async (done) => {
     const res = await request(server)
                       .get('/tasks?num=first&name=test');
           expect(res.status).toEqual(200);
+          done();
   });
 }); 
