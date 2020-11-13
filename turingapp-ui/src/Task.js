@@ -12,17 +12,17 @@ export default function Task(props) {
     const [{}, dispatch] = useTaskState();
 
     const deleteTask = async (id) => {
-        // const deleteResponse = await axios({
-        //     method: 'DELETE',
-        //     url: `http://localhost:5000/tasks/${id}`,
-        //     headers: {'Content-Type': 'application/json'}
-        //   });
-          // console.log("API deleteTask data", deleteResponse.data);
+        dispatch({
+          type: 'DELETE_TASK',
+          taskId: id
+        });
 
-          dispatch({
-            type: 'DELETE_TASK',
-            taskId: id
+        const deleteResponse = await axios({
+            method: 'DELETE',
+            url: `http://localhost:5000/tasks/${id}`,
+            headers: {'Content-Type': 'application/json'}
           });
+          console.log("API deleteTask data", deleteResponse.data);
 
           const getResponse = await axios({
             method: 'GET',

@@ -49,13 +49,35 @@ export default function Tasks(props) {
         getTasks();
     }, [])
 
-    const formChange = (e) => {
+    const addTask = async(name, type) => {
+      let id = '5fa82b63f201f705d1a3ab7j';
+      if(!name || !type) {
+        console.log('Input fields must be filled');
+        return false;
+      }
+      dispatch({
+        type : 'ADD_TASK',
+        task: { id, name, type }
+      });
+      const getResponse = await axios({
+        method: 'POST',
+        url: `http://localhost:5000/tasks/new`,
+        headers: {'Content-Type': 'application/json'},
+        data: {name, type}
+      });
+    console.log("API data", getResponse.data, id);
+  }
+
+  const formChange = (e) => {
       e.preventDefault();
       console.log(e.target.value);
     }
     const submitForm = (e) => {
       e.preventDefault();
-      console.log(e.target);
+      const name = e.target[0].value;
+      const type = e.target[1].value;
+      console.log(e.target[1].value);
+     addTask(name, type);
     }
 
     const allTasks = tasks.filter(x => x.checked !== 'strike');
