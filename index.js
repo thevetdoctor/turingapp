@@ -22,7 +22,8 @@ app.use((req, res, next) => {
 app.use('/tasks', router);
 
 app.get('/', (req, res) => {
-    return res.json('Turing app is live!!!');
+    // return res.json('Turing app is live!!!');
+    return res.send('./turingapp-ui');
 }); 
 
 app.listen(PORT, () => {

@@ -44,12 +44,22 @@
     left: 2em;
 }
 
-.task_delete {
+.task_btn {
     position: absolute;
-    justify-self: center;
-    flex: 1;
+    display: flex;
     right: 1em;
     border-radius: 0.5em;
+    flex-flow: column-reverse;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.task_edit {
+    color: #fff;
+    margin: -.8em 0 1em 0;
+}
+
+.task_delete {
     color: red;
 }
 
@@ -58,7 +68,12 @@
     transform: rotateX(1turn);
 }
 
+.task_edit:hover {
+    font-size: 1.2em;
+    transform: rotateY(1turn);
+}
+
 .task_delete:hover {
-    font-size: 1.3em;
+    font-size: 1.2em;
     transform: rotateX(1turn);
 }

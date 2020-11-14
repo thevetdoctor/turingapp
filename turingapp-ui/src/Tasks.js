@@ -7,6 +7,9 @@ import Modal from 'react-modal';
 import { useTaskState } from './TaskProvider';
 import { FaTimes, FaPlus } from 'react-icons/fa';
 import axios from 'axios';
+import config from './config';
+
+const apiUrl = config();
 
 const customStyles = {
   content : {
@@ -37,7 +40,7 @@ export default function Tasks(props) {
       const getTasks = async () => {
         const res = await axios({
             method: 'GET',
-            url: 'http://localhost:5000/tasks',
+            url: `${apiUrl}/tasks`,
             headers: {'Content-Type': 'application/json'}
           });
           console.log("API data", res.data);
@@ -61,11 +64,12 @@ export default function Tasks(props) {
       });
       const getResponse = await axios({
         method: 'POST',
-        url: `http://localhost:5000/tasks/new`,
+        url: `${apiUrl}/tasks/new`,
         headers: {'Content-Type': 'application/json'},
         data: {name, type}
       });
-    console.log("API data", getResponse.data, id);
+    console.log("API data", getResponse.data, getResponse.status, id);
+    if(getResponse.status === 200) setOpenModal(false);
   }
 
   const formChange = (e) => {
@@ -124,7 +128,7 @@ export default function Tasks(props) {
               </div>
               {allTasks?.map((item) => (
                 <Task 
-                  key={item._id}
+                  key={item._id ? item._id : item.id}
                   id={item._id}
                   name={item.name}
                   type={item.type}

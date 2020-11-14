@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 import Task from './Task';
 import "./Tasks.css";
 import { useTaskState } from './TaskProvider';
-// import { FaTimesCircle } from 'react-icons/fa';
 import axios from 'axios';
+import config from './config';
+
+const apiUrl = config();
 
 export default function Tasks(props) {
   const [{ tasks }, dispatch] = useTaskState();
@@ -14,7 +16,7 @@ export default function Tasks(props) {
       const getTasks = async () => {
         const res = await axios({
             method: 'GET',
-            url: 'http://localhost:5000/tasks',
+            url: `${apiUrl}/tasks`,
             headers: {'Content-Type': 'application/json'}
           });
           console.log("API data", res.data);
@@ -42,7 +44,7 @@ export default function Tasks(props) {
              </div>
               {checkedTasks?.map((item) => (
                 <Task 
-                key={item._id}
+                key={item._id ? item._id : item.id}
                 id={item._id}
                 name={item.name}
                 type={item.type}

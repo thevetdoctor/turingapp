@@ -23,7 +23,7 @@ export const initialState = {
       case "ADD_TASK":
           console.log('ADD_TASK:reducer: ', action.task);
         return {
-          ...state, tasks: [...state.tasks, action.task]
+          ...state, tasks: [action.task, ...state.tasks]
         };
       case "GET_TASKS":
           console.log('GET_TASKS:reducer: ', action.tasks);
