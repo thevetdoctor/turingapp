@@ -26,8 +26,7 @@ app.use('/tasks', router);
 app.get('/', (req, res) => {
     // return res.json('Turing app is live!!!');
     console.log('dirname', __dirname);
-    // return res.sendFile(path.join(__dirname, './turingapp-ui/build/index.html'));
-    return res.sendFile('./turingapp-ui/build/index.html');
+    return res.sendFile(path.join(__dirname, './turingapp-ui/build/index.html').replace('app/', ''));
 }); 
 
 app.listen(PORT, () => {
