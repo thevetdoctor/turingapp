@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const path = require('path');
 const parser = require('body-parser');
 const morgan = require('morgan');
 const cors = require('cors');
@@ -10,6 +11,7 @@ app.use(morgan('dev'));
 app.use(cors());
 app.use(parser.urlencoded({ extended: true }));
 app.use(parser.json());
+app.use(express.static(path.join(__dirname, './turingapp-ui/build/')));
 // app.use(express.urlencoded({ extended: true }))
 // app.use(express.json())
 
@@ -23,7 +25,8 @@ app.use('/tasks', router);
 
 app.get('/', (req, res) => {
     // return res.json('Turing app is live!!!');
-    return res.send('./turingapp-ui');
+    console.log('dirname', __dirname);
+    return res.sendFile(path.join(__dirname, './turingapp-ui/build/index.html'));
 }); 
 
 app.listen(PORT, () => {
