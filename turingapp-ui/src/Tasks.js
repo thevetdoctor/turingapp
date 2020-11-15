@@ -40,7 +40,7 @@ export default function Tasks(props) {
       const getTasks = async () => {
         const res = await axios({
             method: 'GET',
-            url: `${apiUrl}tasks`,
+            url: `${apiUrl}/tasks`,
             headers: {'Content-Type': 'application/json'}
           });
           console.log("API data", res.data);
@@ -64,7 +64,7 @@ export default function Tasks(props) {
       });
       const getResponse = await axios({
         method: 'POST',
-        url: `${apiUrl}tasks/new`,
+        url: `${apiUrl}/tasks/new`,
         headers: {'Content-Type': 'application/json'},
         data: {name, type}
       });
