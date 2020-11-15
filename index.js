@@ -27,9 +27,8 @@ app.get('/', (req, res) => {
     // return res.json('Turing app is live!!!');
     console.log('dirname', __dirname);
     console.log(path.join(__dirname, './turingapp-ui/build'));
-    return res.sendFile(path.join(__dirname));
+    return res.sendFile(path.join(__dirname, "/turingapp-ui/build"));
 }); 
-console.log(path.isAbsolute(__dirname));
 
 app.listen(PORT, () => {
     console.log(`Server is started @PORT: ${PORT}`);
