@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
     // return res.json('Turing app is live!!!');
     console.log('dirname', __dirname);
     // return res.sendFile(path.join(__dirname, "/turingapp-ui/build/index"));
-    return res.sendFile('index.html', {root: __dirname + "/turingapp-ui/build/"});
+    return res.sendFile('index.html', {root: __dirname + "/turingapp-ui/public/"});
 }); 
 console.log(process.cwd());
 
