@@ -11,7 +11,7 @@ app.use(morgan('dev'));
 app.use(cors());
 app.use(parser.urlencoded({ extended: true }));
 app.use(parser.json());
-app.use('/', express.static(path.join(process.cwd(), './turingapp-ui/build/')));
+app.use('/', express.static(path.join(process.cwd(), './build/')));
 // app.use(express.urlencoded({ extended: true }))
 // app.use(express.json())
 
@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
     // return res.json('Turing app is live!!!');
     console.log('dirname', __dirname);
     // return res.sendFile(path.join(__dirname, "/turingapp-ui/build/index"));
-    return res.sendFile('index.html', {root: process.cwd() + "/turingapp-ui/build/"});
+    return res.sendFile('index.html', {root: process.cwd() + "/build/"});
 }); 
 console.log(process.cwd());
 
