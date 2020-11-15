@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
     // return res.json('Turing app is live!!!');
     console.log('dirname', __dirname);
     console.log(path.join(__dirname, './turingapp-ui/build'));
-    return res.sendFile("/turingapp-ui/build");
+    return res.sendFile(path.join(__dirname, "/turingapp-ui/build/index"));
 }); 
 
 app.listen(PORT, () => {
