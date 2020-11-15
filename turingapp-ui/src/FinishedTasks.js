@@ -16,7 +16,7 @@ export default function Tasks(props) {
       const getTasks = async () => {
         const res = await axios({
             method: 'GET',
-            url: `${apiUrl}/tasks`,
+            url: `${apiUrl}tasks`,
             headers: {'Content-Type': 'application/json'}
           });
           console.log("API data", res.data);

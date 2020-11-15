@@ -22,14 +22,14 @@ export default function Task(props) {
 
         const deleteResponse = await axios({
             method: 'DELETE',
-            url: `${apiUrl}/tasks/${id}`,
+            url: `${apiUrl}tasks/${id}`,
             headers: {'Content-Type': 'application/json'}
           });
           console.log("API deleteTask data", deleteResponse.data);
 
           const getResponse = await axios({
             method: 'GET',
-            url: `${apiUrl}/tasks`,
+            url: `${apiUrl}tasks`,
             headers: {'Content-Type': 'application/json'}
           });
           console.log("API data", getResponse.data);
@@ -47,7 +47,7 @@ export default function Task(props) {
 
         const editResponse = await axios({
             method: 'PATCH',
-            url: `${apiUrl}/tasks/${id}`,
+            url: `${apiUrl}tasks/${id}`,
             headers: {'Content-Type': 'application/json'},
             data: {name: 'edited', type: 'edited'}
           });
@@ -55,7 +55,7 @@ export default function Task(props) {
 
           const getResponse = await axios({
             method: 'GET',
-            url: `${apiUrl}/tasks`,
+            url: `${apiUrl}tasks`,
             headers: {'Content-Type': 'application/json'}
           });
           console.log("API data", getResponse.data);
@@ -72,7 +72,7 @@ export default function Task(props) {
       });
       const getResponse = await axios({
         method: 'PATCH',
-        url: `${apiUrl}/tasks/${props.id}`,
+        url: `${apiUrl}tasks/${props.id}`,
         headers: {'Content-Type': 'application/json'},
         data: {checked: 'strike', done: true}
       });
@@ -86,7 +86,7 @@ export default function Task(props) {
       });
       const getResponse = await axios({
         method: 'PATCH',
-        url: `${apiUrl}/tasks/${props.id}`,
+        url: `${apiUrl}tasks/${props.id}`,
         headers: {'Content-Type': 'application/json'},
         data: {checked: '', done: false}
       });
