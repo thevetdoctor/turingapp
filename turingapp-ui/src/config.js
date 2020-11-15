@@ -3,6 +3,6 @@ export default function() {
     if(window.location.host.indexOf('localhost') > -1) {
         return 'http://localhost:5000';
     } else {
-        return 'https://daychecker.herokuapp.com/';
+        return 'https://daychecker.herokuapp.com';
     }
 }
