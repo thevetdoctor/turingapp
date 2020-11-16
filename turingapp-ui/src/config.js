@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 export default function() {
     console.log(window.location.host);
     if(window.location.host.indexOf('localhost') > -1) {

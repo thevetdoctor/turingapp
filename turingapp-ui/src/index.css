@@ -5,9 +5,20 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #DEDBD8;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+@media screen and (min-width: 430px) {
+  body {
+    width: 50vw;
+    position: relative;
+    left: 40vw;
+    background: url('./task2.jpg');
+    background-size: cover;
+  }
 }

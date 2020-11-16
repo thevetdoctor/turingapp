@@ -14,8 +14,8 @@ const apiUrl = config();
 const customStyles = {
   content : {
     backgroundColor: 'rgb(79, 165, 199)',
-    fontSize: '1.5em',
-    top                   : '40%',
+    fontSize: '1.2em',
+    top                   : '44%',
     left                  : '50%',
     right                 : 'auto',
     bottom                : 'auto',
@@ -23,15 +23,16 @@ const customStyles = {
     transform             : 'translate(-50%, -50%)',
     display: 'flex',
     flexFlow: 'column',
-    width: '100vw',
+    width: '75vw',
     alignItems: 'center',
-    borderRadius: '1em',
+    borderRadius: '2em',
     justifyContent: 'center'
   }
 };
 
 export default function Tasks(props) {
   const [{ tasks }, dispatch] = useTaskState();
+  const [submitted, setSubmitted] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
   Modal.setAppElement('div');
@@ -52,12 +53,20 @@ export default function Tasks(props) {
         getTasks();
     }, [])
 
+    useEffect(() => {
+      setSubmitted(false);
+      setOpenModal(false);
+    }, [tasks])
+
     const addTask = async(name, type) => {
-      let id = '5fa82b63f201f705d1a3ab7j';
+      // let id = '5fa82b63f201f705d1a3ab73';
+      let str = Math.trunc(Math.random() * 100);
+      let id = `5fa82b63f201f705d1a3ab${str}`;
       if(!name || !type) {
         console.log('Input fields must be filled');
         return false;
       }
+      setSubmitted(true);
       dispatch({
         type : 'ADD_TASK',
         task: { id, name, type }
@@ -69,7 +78,9 @@ export default function Tasks(props) {
         data: {name, type}
       });
     console.log("API data", getResponse.data, getResponse.status, id);
+    setSubmitted(false);
     if(getResponse.status === 200) setOpenModal(false);
+    return;
   }
 
   const formChange = (e) => {
@@ -89,28 +100,45 @@ export default function Tasks(props) {
 
     return (
         <div>
-            <h3>My Tasks : {allTasks?.length}</h3>
+            <h3>My Pending Tasks : {allTasks?.length}</h3>
             <Modal 
               isOpen={openModal}
               style={customStyles}
             >
-              <div className="closeBtn" onClick={() => setOpenModal(false)}><FaTimes /></div>
-              <h2> Plan a new task! </h2>
+              <div className="closeBtn" onClick={() => setOpenModal(false)}><span>close</span><FaTimes /></div>
+              <h2> Schedule a new task! </h2>
               <form 
                 onSubmit={(e) => submitForm(e)} 
                 >
+                <div>
+                  <label>Task</label>
                 <input 
                   type="text" 
-                  placeholder="Enter your task e.g. Read"
+                  placeholder="Enter your task e.g. Laundry"
                   onChange={(e) => {formChange(e)}}
+                  required
                   /><br />
+                  </div>
+                  <div>
+                    <label>Category</label>
                 <input 
                   type="text" 
-                  placeholder="Enter category, e.g sports"
+                  placeholder="Enter category, e.g chores"
                   onChange={(e) => {formChange(e)}}
+                  required
                   /><br />
+                  </div>
+                  <div>
+                  <label>Date & Time</label>                  
+                  <input
+                  type="datetime-local"
+                  onChange={(e) => {formChange(e)}}
+                  required
+                  />
+                  </div>
                 <input 
-                type="submit" 
+                type="submit"
+                value={submitted ? 'Submitting' : 'Submit'}
                 />
               </form>
             </Modal>

@@ -1,7 +1,7 @@
 .task {
     /* border: 1px solid; */
     padding: 1em;
-    background-color: skyblue;
+    background-color: #524632;
     color: #fff;
     display: flex;
     justify-content: space-evenly;
@@ -77,3 +77,10 @@
     font-size: 1.2em;
     transform: rotateX(1turn);
 }
+
+
+@media screen and (min-width: 430px) {
+    .task {
+      font-size: 1em;
+    }
+  }

@@ -38,7 +38,7 @@ export default function Tasks(props) {
               <div>
                <Link to="/">
                <div className="tasks_new">
-                <span>Back to Tasks</span>
+                <span>Pending Tasks</span>
                 </div>
                </Link>
              </div>

@@ -1,7 +1,7 @@
 .tasks_main {
-    background-color: aliceblue;
+    background-color: #8F7E4F;
     height: 80vh;
-    border-radius: 2em;
+    border-radius: 2em 2em 0 0;
     padding: .5em -2em;
 }
 
@@ -13,51 +13,83 @@
 
 .tasks_new {
     position: relative;
-    font-size: 1.3em;
+    /* font-size: 1.3em; */
     cursor: pointer;
     padding: .1em;
     border-radius: .5em;
-    background-color: rgb(79, 165, 199);
-    color: #fff;
-    box-shadow: -2px 2px 2px;
+    background-color: #C3C49E;
+    color: #8F7E4F;
+    box-shadow: 0 0 6px #fff;
+    justify-content: center;
+    align-items: center;
 }
 
 a {
     text-decoration: none;
 }
 .tasks_new:hover {
-    box-shadow: 2px 2px 2px skyblue;
-    background-color: #fff;
-    color: skyblue;
+    box-shadow: 2px 2px;
+    background-color: #D8FFDD;
+    color: #524632;
 }
 
 .tasks_new span {
     position: relative;
-    top: -.4em;
-    font-size: .6em;
     font-weight: 700;
-    margin: .2em -.1em;
-    padding: .5em .2em;
+    padding: .2em;
 }
 
 .closeBtn {
     color: #fff;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.closeBtn:hover {
+    font-size: 1.2em;
+}
+
+.closeBtn span {
+    margin-bottom: 0.1em;
+}
+
+form {
+    padding: 0.2em;
 }
 
 form input {
     border-radius: .6em;
-    padding: .6em;
-    margin-top: .6em;
-    margin-left: -.4em;
-    width: 100%;
+    padding: .5em;
+    margin-bottom: .7em;
+    margin-top: .4em;
+    width: 90%;
     font-size: 1em;
+    border: none;
+}
+
+form label {
+    color: #fff;
+    font-weight: bolder;
+    margin: 0.2em 30%;
+    align-self: center;
+}
+
+form input:focus {
+    outline: none;
 }
 
 input[type=submit] {
-    margin-left: .5em;
+    margin-left: 3em;
+    width: 8em;
     background-color: purple;
     color: #fff;
     font-size: 1em;
     font-weight: bold;
+    box-shadow: 0 0 5px #000;
+}
+
+input[type=submit]:hover {
+    background-color: #C3C49E;
 }

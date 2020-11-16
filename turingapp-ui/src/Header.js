@@ -1,5 +1,5 @@
 export default function Header() {
     return (
-        <h2>Turing Task Manager</h2>
+        <h2>Daily Task Manager</h2>
     );
 }
