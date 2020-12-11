@@ -1,6 +1,6 @@
 /* eslint-disable no-empty-pattern */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import "./Task.css";
@@ -13,6 +13,9 @@ const apiUrl = config();
 export default function Task(props) {
     const { checked } = props;
     const [{}, dispatch] = useTaskState();
+    const [ editable, setEditable ] = useState(false);
+
+    console.log(editable);
 
     const deleteTask = async (id) => {
         dispatch({
@@ -117,14 +120,24 @@ export default function Task(props) {
                 <Moment fromNow>{props.createdOn}</Moment>
                 </span>
             </div>
+            {!editable ?
             <div className="task_btn">
               <div className="task_delete" onClick={() => deleteTask(props.id)}>
                 <FaTrashAlt />
               </div>
-              <div className="task_edit" onClick={() => editTask(props.id)}>
+              <div className="task_edit" onClick={() => setEditable(true)}>
                 <FaEdit />
               </div>
             </div>
+            :
+            <div className="task_btn">
+              <div className="task_delete" onClick={() => deleteTask(props.id)}>
+                Save
+              </div>
+              <div className="task_edit" onClick={() => editTask(props.id)}>
+                Cancel
+              </div>
+            </div>}
         </div>
     )
 }
